@@ -101,7 +101,6 @@ class adminController {
     //getAllBill
     static getAllBills = async (req, res) => {
         try {
-            console.log(req.body);
             const data = await Bill.find()
             res.send(data)
         } catch (error) {
@@ -112,7 +111,6 @@ class adminController {
     //getAllUser= find() authenticated by Admin
     static getAllUsers = async (req, res) => {
         try {
-            console.log(req.body)
             const data = await User.find()
             res.send(data)
         } catch (error) {

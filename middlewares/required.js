@@ -6,15 +6,16 @@ import jwt from "jsonwebtoken";
 
 class middleware {
     static auth = async (req, res, next) => {
+        console.log(req.headers, "9 line")
         const { authorization } = req.headers;
         let token;
         if (authorization && authorization.startsWith("Bearer")) {
             try {
                 token = authorization?.split(" ")[1]
+                console.log(token)
 
                 //verify token
                 const { user } = jwt.verify(token, process.env.secreatKey)
-                console.log(user, "17");
                 //get User from token
                 req.user = await user
                 next()
@@ -26,12 +27,12 @@ class middleware {
                 })
             }
         }
-        if (!token) {
-            res.send({
-                status: "failed",
-                msg: "no token"
-            })
-        }
+        // if (!token) {
+        //     res.send({
+        //         status: "failed",
+        //         msg: "no token"
+        //     })
+        // }
     }
     static admin = async (req, res, next) => {
         if (req.user.Role !== "Admin") {
