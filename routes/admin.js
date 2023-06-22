@@ -13,6 +13,7 @@ router.post('/changePasswordByAdmin', auth, admin, adminController.changePasswor
 
 
 router.get('/getAllBills', auth, adminController.getAllBills);
+router.get('/getAllUsers', auth, admin, adminController.getAllUsers);
 
 
 export default router

@@ -20,7 +20,10 @@ class userController {
             const { email, password } = req.body;
             const existedUser = await User.findOne({ email });
             if (!existedUser) {
-                console.log("your email is not registered");
+                res.send({
+                    status: "failed",
+                    msg: "email is not registered"
+                })
             } else {
                 const isMatched = await bcrypt.compare(password, existedUser.password);
                 // console.log(isMatched, "26");

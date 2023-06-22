@@ -47,7 +47,10 @@ class adminController {
             const { email, password } = req.body;
             const existedAdmin = await Admin.findOne({ email });
             if (!existedAdmin) {
-                console.log("your email is not registered");
+                res.send({
+                    status: "failed",
+                    msg: "Admin Login unsuccessful"
+                })
             } else {
                 const isMatched = await bcrypt.compare(password, existedAdmin.password);
 
@@ -106,6 +109,16 @@ class adminController {
         }
     }
 
+    //getAllUser= find() authenticated by Admin
+    static getAllUsers = async (req, res) => {
+        try {
+            console.log(req.body)
+            const data = await User.find()
+            res.send(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default adminController
